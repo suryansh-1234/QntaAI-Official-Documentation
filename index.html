@@ -1,0 +1,381 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>QntaAI — Where Curiosity &gt; Age</title>
+
+<style>
+    /* ================================
+       QntaAI — Single File Website
+       ================================ */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #050508;
+        color: #ffffff;
+        min-height: 100vh;
+    }
+
+    /* ---------- Navigation ---------- */
+
+    header {
+        width: 100%;
+        padding: 20px 7%;
+        border-bottom: 1px solid #1a1a22;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    nav h2 {
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+
+    nav a {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 10px 18px;
+        border: 1px solid #30303a;
+        border-radius: 8px;
+        transition: 0.25s ease;
+    }
+
+    nav a:hover {
+        background: #15151f;
+        transform: translateY(-2px);
+    }
+
+    /* ---------- Hero ---------- */
+
+    .hero {
+        min-height: 80vh;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .welcome {
+        font-size: 13px;
+        letter-spacing: 4px;
+        color: #888899;
+        margin-bottom: 15px;
+    }
+
+    .hero h1 {
+        font-size: clamp(60px, 12vw, 120px);
+        letter-spacing: -4px;
+
+        background: linear-gradient(
+            90deg,
+            #ffffff,
+            #8b8bff,
+            #ffffff
+        );
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .tagline {
+        margin-top: 10px;
+        font-size: clamp(20px, 4vw, 32px);
+        font-weight: 400;
+    }
+
+    .description {
+        max-width: 600px;
+        margin-top: 20px;
+        line-height: 1.7;
+        color: #9a9aa8;
+    }
+
+    /* ---------- Launch Button ---------- */
+
+    .launch-button {
+        display: inline-block;
+
+        margin-top: 35px;
+        padding: 14px 28px;
+
+        color: #ffffff;
+        text-decoration: none;
+
+        border: 1px solid #5555ff;
+        border-radius: 10px;
+
+        background: #10101a;
+
+        transition: 0.25s ease;
+    }
+
+    .launch-button:hover {
+        transform: translateY(-3px);
+        background: #18182a;
+        box-shadow: 0 0 25px #5555ff55;
+    }
+
+    /* ---------- General Sections ---------- */
+
+    .content-section {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 25px;
+    }
+
+    .content-section h2 {
+        margin-bottom: 20px;
+        font-size: 32px;
+    }
+
+    .content-section > p {
+        color: #9a9aa8;
+        line-height: 1.8;
+    }
+
+    /* ---------- Credits ---------- */
+
+    .credits {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 80px 25px;
+    }
+
+    .credits h2 {
+        margin-bottom: 30px;
+        font-size: 32px;
+    }
+
+    .credit-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .credit-card {
+        padding: 25px;
+
+        background: #0c0c12;
+        border: 1px solid #20202b;
+        border-radius: 14px;
+
+        transition: 0.25s ease;
+    }
+
+    .credit-card:hover {
+        transform: translateY(-5px);
+        border-color: #5555ff;
+        box-shadow: 0 0 25px #5555ff22;
+    }
+
+    .credit-card h3 {
+        font-size: 19px;
+        margin-bottom: 10px;
+    }
+
+    .credit-card p {
+        color: #8f8f9e;
+        line-height: 1.6;
+    }
+
+    /* ---------- Footer ---------- */
+
+    footer {
+        padding: 30px;
+        text-align: center;
+
+        border-top: 1px solid #1a1a22;
+
+        color: #666675;
+        font-size: 14px;
+    }
+
+    /* ---------- Mobile ---------- */
+
+    @media (max-width: 700px) {
+
+        header {
+            padding: 18px 5%;
+        }
+
+        nav h2 {
+            font-size: 20px;
+        }
+
+        nav a {
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        .hero {
+            min-height: 75vh;
+        }
+
+        .content-section,
+        .credits {
+            padding: 60px 20px;
+        }
+
+        .credit-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+</head><body><!-- ================================
+     Navigation
+     ================================ -->
+
+<header>
+
+    <nav>
+
+        <h2>QntaAI</h2>
+
+        <a href="https://qntaai.onrender.com">
+            Open QntaAI
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- ================================
+     Main Content
+     ================================ -->
+
+<main>
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <p class="welcome">
+            WELCOME TO
+        </p>
+
+        <h1>
+            QntaAI
+        </h1>
+
+        <h2 class="tagline">
+            Where Curiosity &gt; Age
+        </h2>
+
+        <p class="description">
+            An AI built for curiosity, creativity,
+            learning, and exploration.
+        </p>
+
+        <a
+            class="launch-button"
+            href="https://qntaai.onrender.com"
+        >
+            Launch QntaAI →
+        </a>
+
+    </section>
+
+
+    <!-- About -->
+
+    <section class="content-section">
+
+        <h2>
+            What is QntaAI?
+        </h2>
+
+        <p>
+            QntaAI is an AI project focused on making
+            intelligent technology accessible, useful,
+            and fun to explore.
+        </p>
+
+    </section>
+
+
+    <!-- Credits -->
+
+    <section class="credits">
+
+        <h2>
+            Credits
+        </h2>
+
+        <div class="credit-grid">
+
+            <div class="credit-card">
+
+                <h3>
+                    Suryansh Singh Bhadoriya
+                </h3>
+
+                <p>
+                    Co-founder &amp; CEO
+                </p>
+
+            </div>
+
+
+            <div class="credit-card">
+
+                <h3>
+                    Arnav Sharma
+                </h3>
+
+                <p>
+                    UI Designer
+                </p>
+
+            </div>
+
+
+            <div class="credit-card">
+
+                <h3>
+                    Govind Trivedi
+                </h3>
+
+                <p>
+                    Debugger
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================================
+     Footer
+     ================================ -->
+
+<footer>
+
+    <p>
+        © 2026 QntaAI. All rights reserved.
+    </p>
+
+</footer>
+
+</body></html>
