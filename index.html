@@ -1,246 +1,724 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>QntaAI — Where Curiosity &gt; Age</title>
 
-<style>
-    /* ================================
-       QntaAI — Single File Website
-       ================================ */
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+    <meta
+        name="description"
+        content="QntaAI — an AI search engine built for curiosity, creativity, learning, and exploration."
+    >
 
-    html {
-        scroll-behavior: smooth;
-    }
+    <meta
+        name="theme-color"
+        content="#050508"
+    >
 
-    body {
-        font-family: Arial, sans-serif;
-        background: #050508;
-        color: #ffffff;
-        min-height: 100vh;
-    }
+    <meta
+        property="og:title"
+        content="QntaAI — Where Curiosity > Age"
+    >
 
-    /* ---------- Navigation ---------- */
+    <meta
+        property="og:description"
+        content="An AI built for curiosity, creativity, learning, and exploration."
+    >
 
-    header {
-        width: 100%;
-        padding: 20px 7%;
-        border-bottom: 1px solid #1a1a22;
-    }
+    <meta
+        property="og:type"
+        content="website"
+    >
 
-    nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+    <meta
+        property="og:url"
+        content="https://suryansh-1234.github.io/QntaAI-Official-Documentation/"
+    >
 
-    nav h2 {
-        font-size: 24px;
-        letter-spacing: 2px;
-    }
+    <title>QntaAI — Where Curiosity &gt; Age</title>
 
-    nav a {
-        color: #ffffff;
-        text-decoration: none;
-        padding: 10px 18px;
-        border: 1px solid #30303a;
-        border-radius: 8px;
-        transition: 0.25s ease;
-    }
+    <style>
 
-    nav a:hover {
-        background: #15151f;
-        transform: translateY(-2px);
-    }
+        /* =========================================
+           QntaAI OFFICIAL DOCUMENTATION
+           Single-file HTML + CSS
+           ========================================= */
 
-    /* ---------- Hero ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .hero {
-        min-height: 80vh;
+        html {
+            scroll-behavior: smooth;
+        }
 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        body {
+            font-family: Arial, sans-serif;
+            background: #050508;
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
 
-        text-align: center;
-        padding: 60px 20px;
-    }
+        a {
+            color: inherit;
+        }
 
-    .welcome {
-        font-size: 13px;
-        letter-spacing: 4px;
-        color: #888899;
-        margin-bottom: 15px;
-    }
-
-    .hero h1 {
-        font-size: clamp(60px, 12vw, 120px);
-        letter-spacing: -4px;
-
-        background: linear-gradient(
-            90deg,
-            #ffffff,
-            #8b8bff,
-            #ffffff
-        );
-
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .tagline {
-        margin-top: 10px;
-        font-size: clamp(20px, 4vw, 32px);
-        font-weight: 400;
-    }
-
-    .description {
-        max-width: 600px;
-        margin-top: 20px;
-        line-height: 1.7;
-        color: #9a9aa8;
-    }
-
-    /* ---------- Launch Button ---------- */
-
-    .launch-button {
-        display: inline-block;
-
-        margin-top: 35px;
-        padding: 14px 28px;
-
-        color: #ffffff;
-        text-decoration: none;
-
-        border: 1px solid #5555ff;
-        border-radius: 10px;
-
-        background: #10101a;
-
-        transition: 0.25s ease;
-    }
-
-    .launch-button:hover {
-        transform: translateY(-3px);
-        background: #18182a;
-        box-shadow: 0 0 25px #5555ff55;
-    }
-
-    /* ---------- General Sections ---------- */
-
-    .content-section {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 80px 25px;
-    }
-
-    .content-section h2 {
-        margin-bottom: 20px;
-        font-size: 32px;
-    }
-
-    .content-section > p {
-        color: #9a9aa8;
-        line-height: 1.8;
-    }
-
-    /* ---------- Credits ---------- */
-
-    .credits {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 80px 25px;
-    }
-
-    .credits h2 {
-        margin-bottom: 30px;
-        font-size: 32px;
-    }
-
-    .credit-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-
-    .credit-card {
-        padding: 25px;
-
-        background: #0c0c12;
-        border: 1px solid #20202b;
-        border-radius: 14px;
-
-        transition: 0.25s ease;
-    }
-
-    .credit-card:hover {
-        transform: translateY(-5px);
-        border-color: #5555ff;
-        box-shadow: 0 0 25px #5555ff22;
-    }
-
-    .credit-card h3 {
-        font-size: 19px;
-        margin-bottom: 10px;
-    }
-
-    .credit-card p {
-        color: #8f8f9e;
-        line-height: 1.6;
-    }
-
-    /* ---------- Footer ---------- */
-
-    footer {
-        padding: 30px;
-        text-align: center;
-
-        border-top: 1px solid #1a1a22;
-
-        color: #666675;
-        font-size: 14px;
-    }
-
-    /* ---------- Mobile ---------- */
-
-    @media (max-width: 700px) {
+        /* =========================================
+           NAVIGATION
+           ========================================= */
 
         header {
-            padding: 18px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            width: 100%;
+            padding: 18px 7%;
+
+            background: rgba(5, 5, 8, 0.88);
+            backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid #1a1a22;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
         }
 
         nav h2 {
-            font-size: 20px;
+            font-size: 24px;
+            letter-spacing: 2px;
         }
 
-        nav a {
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            color: #aaaabc;
+            text-decoration: none;
+
             padding: 8px 12px;
+
+            border-radius: 8px;
+
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            background: #15151f;
+        }
+
+        .open-button {
+            color: #ffffff !important;
+            border: 1px solid #30303a;
+        }
+
+        .open-button:hover {
+            border-color: #5555ff;
+            transform: translateY(-2px);
+        }
+
+        /* =========================================
+           HERO
+           ========================================= */
+
+        .hero {
+            min-height: 82vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 80px 20px;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            background: #5555ff;
+            opacity: 0.08;
+
+            filter: blur(130px);
+
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+        .welcome {
+            position: relative;
+
+            font-size: 13px;
+            letter-spacing: 5px;
+
+            color: #888899;
+
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            position: relative;
+
+            font-size: clamp(65px, 14vw, 140px);
+
+            letter-spacing: -6px;
+
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #8b8bff,
+                #ffffff
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation: glow 4s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 5px #5555ff33);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 25px #5555ff55);
+            }
+        }
+
+        .tagline {
+            position: relative;
+
+            margin-top: 10px;
+
+            font-size: clamp(20px, 4vw, 32px);
+
+            font-weight: 400;
+        }
+
+        .description {
+            position: relative;
+
+            max-width: 650px;
+
+            margin-top: 20px;
+
+            color: #9a9aa8;
+
+            font-size: 17px;
+        }
+
+        .hero-buttons {
+            position: relative;
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 35px;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+        }
+
+        .launch-button,
+        .secondary-button {
+            display: inline-block;
+
+            padding: 14px 28px;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            transition: 0.25s ease;
+        }
+
+        .launch-button {
+            color: #ffffff;
+
+            border: 1px solid #5555ff;
+
+            background: #10101a;
+        }
+
+        .launch-button:hover {
+            transform: translateY(-3px);
+
+            background: #18182a;
+
+            box-shadow: 0 0 25px #5555ff55;
+        }
+
+        .secondary-button {
+            color: #aaaabc;
+
+            border: 1px solid #30303a;
+
+            background: #0b0b10;
+        }
+
+        .secondary-button:hover {
+            color: #ffffff;
+
+            border-color: #5555ff;
+
+            transform: translateY(-3px);
+        }
+
+        /* =========================================
+           GENERAL SECTIONS
+           ========================================= */
+
+        .section {
+            max-width: 1000px;
+
+            margin: 0 auto;
+
+            padding: 90px 25px;
+        }
+
+        .section-header {
+            margin-bottom: 35px;
+        }
+
+        .section-label {
+            color: #7777aa;
+
+            font-size: 12px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+        .section h2 {
+            font-size: 38px;
+
+            margin-bottom: 15px;
+        }
+
+        .section-intro {
+            color: #9a9aa8;
+
+            max-width: 700px;
+
+            line-height: 1.8;
+        }
+
+        /* =========================================
+           CARDS
+           ========================================= */
+
+        .card-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .card {
+            padding: 28px;
+
+            background: #0c0c12;
+
+            border: 1px solid #20202b;
+
+            border-radius: 16px;
+
+            transition: 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+
+            border-color: #5555ff;
+
+            box-shadow: 0 0 25px #5555ff22;
+        }
+
+        .card-icon {
+            font-size: 30px;
+
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #8f8f9e;
+
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           SEARCH MODES
+           ========================================= */
+
+        .mode-card {
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .mode-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 100px;
+            height: 100px;
+
+            right: -40px;
+            bottom: -40px;
+
+            background: #5555ff;
+
+            opacity: 0.08;
+
+            border-radius: 50%;
+
+            filter: blur(20px);
+        }
+
+        /* =========================================
+           MODEL TABLE
+           ========================================= */
+
+        .table-container {
+            overflow-x: auto;
+
+            border: 1px solid #20202b;
+
+            border-radius: 14px;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: #0c0c12;
+        }
+
+        th,
+        td {
+            padding: 18px;
+
+            text-align: left;
+
+            border-bottom: 1px solid #20202b;
+        }
+
+        th {
+            color: #ffffff;
+
+            background: #101018;
+        }
+
+        td {
+            color: #9999a8;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* =========================================
+           ARCHITECTURE
+           ========================================= */
+
+        .architecture {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 30px;
+        }
+
+        .architecture-box {
+            width: min(600px, 100%);
+
+            padding: 18px;
+
+            text-align: center;
+
+            background: #0c0c12;
+
+            border: 1px solid #30303a;
+
+            border-radius: 12px;
+
+            transition: 0.25s ease;
+        }
+
+        .architecture-box:hover {
+            border-color: #5555ff;
+
+            box-shadow: 0 0 20px #5555ff22;
+        }
+
+        .architecture-arrow {
+            color: #6666aa;
+
+            font-size: 22px;
+        }
+
+        /* =========================================
+           CODE BLOCK
+           ========================================= */
+
+        .code-block {
+            margin-top: 25px;
+
+            padding: 25px;
+
+            background: #08080d;
+
+            border: 1px solid #20202b;
+
+            border-radius: 14px;
+
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            color: #bdbdd0;
+
+            font-family:
+                Consolas,
+                "Courier New",
+                monospace;
+
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           FAQ
+           ========================================= */
+
+        details {
+            background: #0c0c12;
+
+            border: 1px solid #20202b;
+
+            border-radius: 12px;
+
+            padding: 18px 20px;
+
+            margin-bottom: 12px;
+        }
+
+        summary {
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        details p {
+            color: #9696a5;
+
+            margin-top: 15px;
+
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           TEAM
+           ========================================= */
+
+        .team-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+        .team-card {
+            padding: 25px;
+
+            background: #0c0c12;
+
+            border: 1px solid #20202b;
+
+            border-radius: 14px;
+
+            transition: 0.25s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+
+            border-color: #5555ff;
+        }
+
+        .team-card h3 {
+            font-size: 18px;
+
+            margin-bottom: 8px;
+        }
+
+        .team-card p {
+            color: #858593;
+
             font-size: 14px;
         }
 
-        .hero {
-            min-height: 75vh;
+        /* =========================================
+           CHANGELOG
+           ========================================= */
+
+        .changelog-item {
+            padding: 22px;
+
+            border-left: 2px solid #5555ff;
+
+            background: #0c0c12;
+
+            margin-bottom: 15px;
+
+            border-radius: 0 12px 12px 0;
         }
 
-        .content-section,
-        .credits {
-            padding: 60px 20px;
+        .changelog-item h3 {
+            margin-bottom: 7px;
         }
 
-        .credit-grid {
-            grid-template-columns: 1fr;
+        .changelog-item p {
+            color: #90909f;
         }
-    }
-</style>
 
-</head><body><!-- ================================
-     Navigation
-     ================================ -->
+        /* =========================================
+           FOOTER
+           ========================================= */
+
+        footer {
+            padding: 40px 25px;
+
+            text-align: center;
+
+            border-top: 1px solid #1a1a22;
+
+            color: #666675;
+
+            font-size: 14px;
+        }
+
+        footer strong {
+            color: #9999aa;
+        }
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 850px) {
+
+            .nav-links a:not(.open-button) {
+                display: none;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 16px 5%;
+            }
+
+            nav h2 {
+                font-size: 20px;
+            }
+
+            .hero {
+                min-height: 75vh;
+
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                letter-spacing: -4px;
+            }
+
+            .section {
+                padding: 65px 20px;
+            }
+
+            .section h2 {
+                font-size: 30px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+
+                width: 100%;
+            }
+
+            .launch-button,
+            .secondary-button {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- =========================================
+     NAVIGATION
+     ========================================= -->
 
 <header>
 
@@ -248,155 +726,770 @@
 
         <h2>QntaAI</h2>
 
-        <a href="https://qntaai.onrender.com">
-            Open QntaAI
-        </a>
+        <div class="nav-links">
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#models">
+                Models
+            </a>
+
+            <a href="#team">
+                Team
+            </a>
+
+            <a
+                class="open-button"
+                href="https://qntaai.onrender.com"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open QntaAI
+            </a>
+
+        </div>
 
     </nav>
 
 </header>
 
 
-<!-- ================================
-     Main Content
-     ================================ -->
+<!-- =========================================
+     HERO
+     ========================================= -->
 
 <main>
 
-    <!-- Hero -->
+<section class="hero">
 
-    <section class="hero">
+    <p class="welcome">
+        WELCOME TO
+    </p>
 
-        <p class="welcome">
-            WELCOME TO
-        </p>
+    <h1>
+        QntaAI
+    </h1>
 
-        <h1>
-            QntaAI
-        </h1>
+    <h2 class="tagline">
+        Where Curiosity &gt; Age begins...
+    </h2>
 
-        <h2 class="tagline">
-            Where Curiosity &gt; Age begins...
-        </h2>
+    <p class="description">
+        An AI built for curiosity, creativity,
+        learning, and exploration.
+    </p>
 
-        <p class="description">
-            An AI built for curiosity, creativity,
-            learning, and exploration.
-        </p>
+    <div class="hero-buttons">
 
         <a
             class="launch-button"
             href="https://qntaai.onrender.com"
+            target="_blank"
+            rel="noopener noreferrer"
         >
             Launch QntaAI →
         </a>
 
-    </section>
+        <a
+            class="secondary-button"
+            href="#about"
+        >
+            Read Documentation
+        </a>
+
+    </div>
+
+</section>
 
 
-    <!-- About -->
+<!-- =========================================
+     ABOUT
+     ========================================= -->
 
-    <section class="content-section">
+<section
+    class="section"
+    id="about"
+>
+
+    <div class="section-header">
+
+        <p class="section-label">
+            Introduction
+        </p>
 
         <h2>
             What is QntaAI?
         </h2>
 
-        <p>
-            QntaAI is a AI-Search engine made by QntaTechnologies
-            and a team, consisting three members. Inspired 
-            by perplexity, an AI answer engine, with search modes—
-            
-           1. Quick - Fast answers with LLM's own language as per 
-                      they are trained on.
-           2. Search - for live quires like news and live data fetched 
-                       by direct internet.
-           3. Research - for multiple quires and user's deep understanding 
-                         releted with live info like live research papers across the world.
-            Model selection— there are three models helps user choose their 
-                           own experience.
-           
-           1. GPT  2. Gemini  3. Grok 
+        <p class="section-intro">
+            QntaAI is an AI search engine created by
+            QntaTechnologies and its team. It is designed
+            around curiosity, learning, creativity,
+            exploration, and access to useful information.
         </p>
 
-    </section>
+    </div>
 
+    <div class="card-grid">
 
-    <!-- Credits -->
+        <div class="card">
 
-    <section class="credits">
-
-        <h2>
-            Credits
-        </h2>
-
-        <div class="credit-grid">
-
-            <div class="credit-card">
-
-                <h3>
-                    Suryansh Singh Bhadoriya
-                </h3>
-
-                <p>
-                    Founder &amp; CEO
-                </p>
-
+            <div class="card-icon">
+                🧠
             </div>
 
+            <h3>
+                AI Assistance
+            </h3>
 
-            <div class="credit-card">
+            <p>
+                Ask questions, explore ideas, learn concepts,
+                solve problems, and interact with AI models.
+            </p>
 
-                <h3>
-                    Arnav Sharma
-                </h3>
-
-                <p>
-                    UI Designer
-                </p>
-
-            </div>
-
-
-            <div class="credit-card">
-
-                <h3>
-                    Govind Trivedi
-                </h3>
-
-                <p>
-                    Co-founder & Debugger
-                </p>
-
-            </div>
-           <div class="credit-card">
-
-                <h3>
-                    Shourya Sharma
-                </h3>
-
-                <p>
-                    Advertiser
-                </p>
-
-            </div>
         </div>
 
-    </section>
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔎
+            </div>
+
+            <h3>
+                AI Search
+            </h3>
+
+            <p>
+                Search-oriented functionality can be used
+                when answers require current information
+                from the internet.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🚀
+            </div>
+
+            <h3>
+                Exploration
+            </h3>
+
+            <p>
+                QntaAI is designed to make curiosity the
+                starting point for discovering information.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     SEARCH MODES
+     ========================================= -->
+
+<section
+    class="section"
+    id="features"
+>
+
+    <div class="section-header">
+
+        <p class="section-label">
+            Search Modes
+        </p>
+
+        <h2>
+            Three ways to explore
+        </h2>
+
+        <p class="section-intro">
+            QntaAI provides different search experiences
+            depending on how much information and research
+            the user needs.
+        </p>
+
+    </div>
+
+    <div class="card-grid">
+
+        <div class="card mode-card">
+
+            <div class="card-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Quick
+            </h3>
+
+            <p>
+                Fast responses generated using the selected
+                AI model's existing knowledge.
+            </p>
+
+        </div>
+
+
+        <div class="card mode-card">
+
+            <div class="card-icon">
+                🔎
+            </div>
+
+            <h3>
+                Search
+            </h3>
+
+            <p>
+                Designed for queries that need live information,
+                such as current events, news, and changing data.
+            </p>
+
+        </div>
+
+
+        <div class="card mode-card">
+
+            <div class="card-icon">
+                🧠
+            </div>
+
+            <h3>
+                Research
+            </h3>
+
+            <p>
+                Designed for deeper exploration involving
+                multiple queries and broader research.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     MODELS
+     ========================================= -->
+
+<section
+    class="section"
+    id="models"
+>
+
+    <div class="section-header">
+
+        <p class="section-label">
+            Model Selection
+        </p>
+
+        <h2>
+            Choose your AI experience
+        </h2>
+
+        <p class="section-intro">
+            QntaAI provides multiple model choices so users
+            can select the experience that best fits their
+            task.
+        </p>
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Model</th>
+                    <th>General purpose</th>
+                    <th>Use case</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>GPT</td>
+                    <td>Reasoning & assistance</td>
+                    <td>Questions, learning, coding and general tasks</td>
+                </tr>
+
+                <tr>
+                    <td>Gemini</td>
+                    <td>General AI</td>
+                    <td>Exploration and flexible assistance</td>
+                </tr>
+
+                <tr>
+                    <td>Grok</td>
+                    <td>General AI</td>
+                    <td>Tasks requiring current information when supported</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     ARCHITECTURE
+     ========================================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <p class="section-label">
+            Architecture
+        </p>
+
+        <h2>
+            How QntaAI works
+        </h2>
+
+        <p class="section-intro">
+            At a high level, QntaAI connects the user interface,
+            backend services, AI models, and information sources
+            into one experience.
+        </p>
+
+    </div>
+
+    <div class="architecture">
+
+        <div class="architecture-box">
+            👤 User
+        </div>
+
+        <div class="architecture-arrow">
+            ↓
+        </div>
+
+        <div class="architecture-box">
+            💻 QntaAI Interface
+        </div>
+
+        <div class="architecture-arrow">
+            ↓
+        </div>
+
+        <div class="architecture-box">
+            ⚙️ QntaAI Backend
+        </div>
+
+        <div class="architecture-arrow">
+            ↓
+        </div>
+
+        <div class="architecture-box">
+            🔎 Search / Research / Model Selection
+        </div>
+
+        <div class="architecture-arrow">
+            ↓
+        </div>
+
+        <div class="architecture-box">
+            🤖 AI Model / Information Source
+        </div>
+
+        <div class="architecture-arrow">
+            ↓
+        </div>
+
+        <div class="architecture-box">
+            💬 Generated Response
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     PROJECT STRUCTURE
+     ========================================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <p class="section-label">
+            Development
+        </p>
+
+        <h2>
+            Project structure
+        </h2>
+
+        <p class="section-intro">
+            A conceptual overview of the major components
+            involved in the QntaAI project.
+        </p>
+
+    </div>
+
+    <div class="code-block">
+
+<pre>
+QntaAI
+│
+├── Frontend
+│   ├── Interface
+│   └── Chat UI
+│
+├── Backend
+│   ├── Application Server
+│   ├── Chat Handling
+│   └── Search Logic
+│
+├── AI
+│   ├── GPT
+│   ├── Gemini
+│   └── Grok
+│
+├── Search
+│   ├── Quick
+│   ├── Search
+│   └── Research
+│
+└── Documentation
+    └── QntaAI Official Documentation
+</pre>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     API
+     ========================================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <p class="section-label">
+            Developer API
+        </p>
+
+        <h2>
+            API documentation
+        </h2>
+
+        <p class="section-intro">
+            Public API documentation can be added here as
+            QntaAI's API becomes available.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>
+            🚧 API Reference
+        </h3>
+
+        <p>
+            API endpoints, authentication, request formats,
+            response formats, rate limits, and examples will
+            be documented here when the public API is ready.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     FAQ
+     ========================================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <p class="section-label">
+            FAQ
+        </p>
+
+        <h2>
+            Frequently asked questions
+        </h2>
+
+    </div>
+
+
+    <details>
+
+        <summary>
+            What is QntaAI?
+        </summary>
+
+        <p>
+            QntaAI is an AI search engine and assistant
+            designed for curiosity, learning, creativity,
+            and exploration.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Who created QntaAI?
+        </summary>
+
+        <p>
+            QntaAI was created by Suryansh Singh Bhadoriya
+            together with the QntaTechnologies team.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            What search modes are available?
+        </summary>
+
+        <p>
+            QntaAI currently describes three experiences:
+            Quick, Search, and Research.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Which AI models are available?
+        </summary>
+
+        <p>
+            QntaAI currently provides model choices
+            including GPT, Gemini, and Grok.
+        </p>
+
+    </details>
+
+</section>
+
+
+<!-- =========================================
+     TEAM
+     ========================================= -->
+
+<section
+    class="section"
+    id="team"
+>
+
+    <div class="section-header">
+
+        <p class="section-label">
+            QntaTechnologies
+        </p>
+
+        <h2>
+            The team
+        </h2>
+
+        <p class="section-intro">
+            The people behind the QntaAI project.
+        </p>
+
+    </div>
+
+    <div class="team-grid">
+
+        <div class="team-card">
+
+            <h3>
+                Suryansh Singh Bhadoriya
+            </h3>
+
+            <p>
+                Founder &amp; CEO
+            </p>
+
+        </div>
+
+
+        <div class="team-card">
+
+            <h3>
+                Arnav Sharma
+            </h3>
+
+            <p>
+                UI Designer
+            </p>
+
+        </div>
+
+
+        <div class="team-card">
+
+            <h3>
+                Govind Trivedi
+            </h3>
+
+            <p>
+                Co-founder &amp; Debugger
+            </p>
+
+        </div>
+
+
+        <div class="team-card">
+
+            <h3>
+                Shourya Sharma
+            </h3>
+
+            <p>
+                Advertiser
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     CHANGELOG
+     ========================================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <p class="section-label">
+            Updates
+        </p>
+
+        <h2>
+            Changelog
+        </h2>
+
+    </div>
+
+
+    <div class="changelog-item">
+
+        <h3>
+            2026 — QntaAI Documentation
+        </h3>
+
+        <p>
+            Official documentation website created for
+            QntaAI, including project information,
+            features, search modes, models, architecture,
+            and team credits.
+        </p>
+
+    </div>
+
+
+    <div class="changelog-item">
+
+        <h3>
+            QntaAI — Search Experience
+        </h3>
+
+        <p>
+            QntaAI introduced multiple search experiences
+            designed for quick answers, live search,
+            and deeper research.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     FINAL CTA
+     ========================================= -->
+
+<section class="hero">
+
+    <p class="welcome">
+        READY?
+    </p>
+
+    <h2 class="tagline">
+        Curiosity starts here.
+    </h2>
+
+    <p class="description">
+        Explore QntaAI and see where your questions can lead.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a
+            class="launch-button"
+            href="https://qntaai.onrender.com"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Open QntaAI →
+        </a>
+
+    </div>
+
+</section>
 
 </main>
 
 
-<!-- ================================
-     Footer
-     ================================ -->
+<!-- =========================================
+     FOOTER
+     ========================================= -->
 
 <footer>
 
     <p>
-        © 2026 QntaAI. All rights reserved.
+        © 2026 <strong>QntaAI</strong>.
+        All rights reserved.
+    </p>
+
+    <p>
+        Where Curiosity &gt; Age begins...
     </p>
 
 </footer>
 
-</body></html>
+</body>
+</html>
