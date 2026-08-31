@@ -16,7 +16,7 @@ text = HTML.read_text(encoding="utf-8")
 
 if not BACKUP.exists():
     BACKUP.write_text(text, encoding="utf-8")
-    print("Created backup:", BACKUP.name)
+    print("Backup created:", BACKUP.name)
 else:
     print("Backup already exists:", BACKUP.name)
 
@@ -30,17 +30,12 @@ emoji_pattern = re.compile(
     "\U0001F300-\U0001FAFF"
     "\U00002600-\U000027BF"
     "\U0001F1E6-\U0001F1FF"
-    "\U00002700-\U000027BF"
     "\U0001F900-\U0001F9FF"
-    "\U0001FA70-\U0001FAFF"
     "]+",
     flags=re.UNICODE
 )
 
 text = emoji_pattern.sub("", text)
-
-# Remove excessive spaces left behind by emoji removal.
-text = re.sub(r"[ \t]{2,}", " ", text)
 
 
 # ============================================================
@@ -59,35 +54,33 @@ text = text.replace(
 
 
 # ============================================================
-# UPDATE MODEL SECTION
+# UPDATE MODELS SECTION
 # ============================================================
 
-# Find <section ... id="models" ...> regardless of whitespace.
-model_match = re.search(
-    r"<section\b[^>]*\bid=[\"']models[\"'][^>]*>",
+models_start_match = re.search(
+    r'<section\b[^>]*\bid=["\']models["\'][^>]*>',
     text,
     flags=re.IGNORECASE
 )
 
-if not model_match:
-    raise SystemExit(
-        "ERROR: Models section not found.\n"
-        "The HTML does not contain a <section> with id=\"models\"."
-    )
+if not models_start_match:
+    raise SystemExit("ERROR: Models section not found.")
 
-model_start = model_match.start()
+models_start = models_start_match.start()
 
-# Find the next section after the models section.
-next_section = text.find(
-    "<section",
-    model_match.end()
+next_section_match = re.search(
+    r'<section\b',
+    text[models_start_match.end():],
+    flags=re.IGNORECASE
 )
 
-if next_section == -1:
-    raise SystemExit(
-        "ERROR: End of Models section not found."
-    )
+if not next_section_match:
+    raise SystemExit("ERROR: End of Models section not found.")
 
+models_end = (
+    models_start_match.end()
+    + next_section_match.start()
+)
 
 models_section = r'''<section
     class="section"
@@ -107,9 +100,9 @@ models_section = r'''<section
         <p class="section-intro">
             QntaAI is not tied to a single AI model.
             Users can select from the available models
-            through the model selector. This provides
-            flexibility when choosing an AI experience
-            for different tasks.
+            through the model selector. This allows
+            different models to be used for different
+            tasks and response styles.
         </p>
 
     </div>
@@ -131,7 +124,7 @@ models_section = r'''<section
             <tbody>
 
                 <tr>
-                    <td>Auto Free</td>
+                    <td>Auto (Free)</td>
                     <td>OpenRouter</td>
                     <td><code>openrouter/free</code></td>
                 </tr>
@@ -143,7 +136,7 @@ models_section = r'''<section
                 </tr>
 
                 <tr>
-                    <td>Dots 3 Note Preview</td>
+                    <td>Dots3 Note Preview</td>
                     <td>Dots Studio</td>
                     <td><code>dots-studio/dots-3-note-preview:free</code></td>
                 </tr>
@@ -255,7 +248,7 @@ models_section = r'''<section
             <p>
                 QntaAI can route requests to different
                 supported models instead of relying on
-                a single AI model.
+                one model provider.
             </p>
 
         </div>
@@ -268,8 +261,8 @@ models_section = r'''<section
 
             <p>
                 The model selector allows users to choose
-                an available model according to the task
-                they are working on.
+                the available model that best fits their
+                current task.
             </p>
 
         </div>
@@ -294,106 +287,16 @@ models_section = r'''<section
 
 '''
 
-text = (
-    text[:model_start]
-    + models_section
-    + text[next_section:]
-)
+text = text[:models_start] + models_section + text[models_end:]
 
 
 # ============================================================
-# UPDATE PROJECT STRUCTURE
+# CURRENT CAPABILITIES SECTION
 # ============================================================
 
-old_structure = r'''<pre>
-QntaAI
-│
-├── Frontend
-│   ├── Interface
-│   └── Chat UI
-│
-├── Backend
-│   ├── Application Server
-│   ├── Chat Handling
-│   └── Search Logic
-│
-├── AI
-│   ├── GPT
-│   ├── Gemini
-│   └── Grok
-│
-├── Search
-│   ├── Quick
-│   ├── Search
-│   └── Research
-│
-└── Documentation
-    └── QntaAI Official Documentation
-</pre>'''
+if "Current QntaAI capabilities" not in text:
 
-new_structure = r'''<pre>
-QntaAI
-│
-├── Frontend
-│   ├── Interface
-│   ├── Chat UI
-│   └── Model Selector
-│
-├── Backend
-│   ├── Application Server
-│   ├── Chat Handling
-│   ├── Model Validation
-│   └── Search Logic
-│
-├── AI
-│   ├── OpenRouter
-│   ├── Model Routing
-│   └── Multiple Supported Models
-│
-├── Search
-│   ├── Quick
-│   ├── Search
-│   └── Research
-│
-├── Storage
-│   └── Conversation Data
-│
-└── Documentation
-    └── QntaAI Official Documentation
-</pre>'''
-
-if old_structure in text:
-    text = text.replace(old_structure, new_structure, 1)
-
-
-# ============================================================
-# UPDATE FAQ
-# ============================================================
-
-old_faq = '''        <p>
-            QntaAI currently provides model choices
-            including GPT, Gemini, and Grok.
-        </p>'''
-
-new_faq = '''        <p>
-            QntaAI provides a multi-model selector with
-            multiple supported models available through
-            the backend. The available model catalog can
-            change as model availability changes.
-        </p>'''
-
-text = text.replace(old_faq, new_faq, 1)
-
-
-# ============================================================
-# ADD CURRENT CAPABILITIES
-# ============================================================
-
-architecture_anchor = '''<!-- =========================================
-     ARCHITECTURE
-     ========================================= -->'''
-
-capabilities = r'''<!-- =========================================
+    capabilities = r'''<!-- =========================================
      CURRENT CAPABILITIES
      ========================================= -->
 
@@ -412,8 +315,8 @@ capabilities = r'''<!-- =========================================
         <p class="section-intro">
             The current QntaAI application combines
             conversational AI, model selection, search
-            modes, conversation history, and a responsive
-            web interface.
+            modes, conversation history, and a web-based
+            interface.
         </p>
 
     </div>
@@ -468,8 +371,9 @@ capabilities = r'''<!-- =========================================
             </h3>
 
             <p>
-                The interface can support file attachments
-                where enabled by the application.
+                The QntaAI interface supports attaching
+                files to conversations where supported
+                by the application.
             </p>
 
         </div>
@@ -481,7 +385,7 @@ capabilities = r'''<!-- =========================================
             </h3>
 
             <p>
-                The web interface is designed to adapt
+                The web interface is designed to work
                 across desktop and mobile screen sizes.
             </p>
 
@@ -494,8 +398,9 @@ capabilities = r'''<!-- =========================================
             </h3>
 
             <p>
-                QntaAI operates as a web application with
-                its frontend and backend working together.
+                QntaAI can be deployed as a web application
+                with its frontend and backend operating
+                together.
             </p>
 
         </div>
@@ -507,23 +412,120 @@ capabilities = r'''<!-- =========================================
 
 '''
 
-if architecture_anchor in text and "CURRENT CAPABILITIES" not in text:
-    text = text.replace(
-        architecture_anchor,
-        capabilities + architecture_anchor,
-        1
+    # Insert before the Architecture section by heading,
+    # not by a fragile CSS comment marker.
+    architecture_match = re.search(
+        r'<section\b[^>]*>[\s\S]*?<h2>\s*How QntaAI works\s*</h2>',
+        text,
+        flags=re.IGNORECASE
+    )
+
+    if architecture_match:
+        architecture_section_start = architecture_match.start()
+        text = (
+            text[:architecture_section_start]
+            + capabilities
+            + text[architecture_section_start:]
+        )
+    else:
+        # Fallback: insert before Project Structure.
+        project_match = re.search(
+            r'<section\b[^>]*>[\s\S]*?<h2>\s*Project structure\s*</h2>',
+            text,
+            flags=re.IGNORECASE
+        )
+
+        if project_match:
+            project_start = project_match.start()
+            text = (
+                text[:project_start]
+                + capabilities
+                + text[project_start:]
+            )
+        else:
+            raise SystemExit(
+                "ERROR: Could not find a safe location for "
+                "Capabilities section."
+            )
+
+
+# ============================================================
+# UPDATE PROJECT STRUCTURE
+# ============================================================
+
+old_structure_pattern = re.compile(
+    r'<pre>\s*'
+    r'QntaAI[\s\S]*?'
+    r'QntaAI Official Documentation'
+    r'\s*</pre>',
+    flags=re.IGNORECASE
+)
+
+new_structure = r'''<pre>
+QntaAI
+│
+├── Frontend
+│   ├── Interface
+│   ├── Chat UI
+│   └── Model Selector
+│
+├── Backend
+│   ├── Application Server
+│   ├── Chat Handling
+│   ├── Model Validation
+│   └── Search Logic
+│
+├── AI
+│   ├── OpenRouter
+│   ├── Model Routing
+│   └── Multiple Supported Models
+│
+├── Search
+│   ├── Quick
+│   ├── Search
+│   └── Research
+│
+├── Storage
+│   └── Conversation Data
+│
+└── Documentation
+    └── QntaAI Official Documentation
+</pre>'''
+
+if old_structure_pattern.search(text):
+    text = old_structure_pattern.sub(
+        new_structure,
+        text,
+        count=1
     )
 
 
 # ============================================================
-# ADD PROFESSIONAL CSS
+# UPDATE FAQ
 # ============================================================
 
-css_anchor = '''        /* =========================================
-           ARCHITECTURE
-           ========================================= */'''
+text = re.sub(
+    r'(<summary>\s*Which AI models are available\?\s*</summary>\s*'
+    r'<p>)[\s\S]*?(</p>)',
+    r'''\1
+            QntaAI provides a multi-model selector with
+            multiple supported models available through
+            the backend. The available catalog can change
+            as model availability changes.
+        \2''',
+    text,
+    count=1,
+    flags=re.IGNORECASE
+)
 
-extra_css = r'''        /* =========================================
+
+# ============================================================
+# ADD CODE STYLING
+# ============================================================
+
+if "DOCUMENTATION ENHANCEMENTS" not in text:
+
+    css = r'''        /* =========================================
            DOCUMENTATION ENHANCEMENTS
            ========================================= */
 
@@ -629,22 +631,27 @@ extra_css = r'''        /* =========================================
 
 '''
 
-if css_anchor in text and "DOCUMENTATION ENHANCEMENTS" not in text:
-    text = text.replace(
-        css_anchor,
-        extra_css + css_anchor,
-        1
+    head_style_end = text.find("</style>")
+
+    if head_style_end == -1:
+        raise SystemExit("ERROR: </style> not found.")
+
+    text = (
+        text[:head_style_end]
+        + "\n"
+        + css
+        + text[head_style_end:]
     )
 
 
 # ============================================================
-# ADD BACK-TO-TOP BUTTON
+# BACK-TO-TOP
 # ============================================================
 
-body_end = '''</body>
-</html>'''
+if 'class="back-to-top"' not in text:
 
-back_to_top = r'''<a
+    back_to_top = r'''
+<a
     class="back-to-top"
     href="#top"
     aria-label="Back to top"
@@ -655,7 +662,11 @@ back_to_top = r'''<a
 
 '''
 
-if 'class="back-to-top"' not in text:
+    body_end = "</body>"
+
+    if body_end not in text:
+        raise SystemExit("ERROR: </body> not found.")
+
     text = text.replace(
         body_end,
         back_to_top + body_end,
@@ -664,10 +675,11 @@ if 'class="back-to-top"' not in text:
 
 
 # ============================================================
-# ADD TOP ANCHOR
+# TOP ANCHOR
 # ============================================================
 
 if '<body id="top">' not in text:
+
     text = text.replace(
         "<body>",
         '<body id="top">',
@@ -676,7 +688,7 @@ if '<body id="top">' not in text:
 
 
 # ============================================================
-# FINAL CLEANUP
+# CLEANUP
 # ============================================================
 
 text = re.sub(
@@ -689,52 +701,52 @@ HTML.write_text(text, encoding="utf-8")
 
 
 # ============================================================
-# VERIFY
+# VERIFICATION
 # ============================================================
-
-final_text = HTML.read_text(encoding="utf-8")
-
-checks = {
-    "Models section": bool(
-        re.search(
-            r'<section\b[^>]*\bid=["\']models["\']',
-            final_text,
-            re.IGNORECASE
-        )
-    ),
-    "Correct surname": "Suryansh Singh Bhadouriya" in final_text,
-    "Capabilities section": "CURRENT CAPABILITIES" in final_text,
-    "Back-to-top": 'class="back-to-top"' in final_text,
-    "Model selector wording": "Multiple AI models" in final_text,
-}
 
 print()
 print("==========================================")
 print(" QntaAI DOCUMENTATION UPGRADE COMPLETE")
 print("==========================================")
 print()
-print("Updated:")
-print("  index.html")
-print()
-print("Changes:")
-print("  - Removed documentation emojis")
-print("  - Fixed surname: Bhadouriya")
-print("  - Updated multi-model documentation")
-print("  - Added model IDs and providers")
-print("  - Updated project architecture")
-print("  - Updated model-selection FAQ")
-print("  - Added current capabilities section")
-print("  - Added model summary cards")
-print("  - Added code styling")
-print("  - Added back-to-top control")
-print("  - Improved mobile model-table behavior")
-print()
-print("Verification:")
 
-for name, passed in checks.items():
-    print("  " + ("[OK] " if passed else "[FAIL] ") + name)
+checks = [
+    (
+        "Models section",
+        'id="models"' in text
+    ),
+    (
+        "Correct surname",
+        "Suryansh Singh Bhadouriya" in text
+    ),
+    (
+        "Capabilities section",
+        "Current QntaAI capabilities" in text
+    ),
+    (
+        "Back-to-top",
+        'class="back-to-top"' in text
+    ),
+    (
+        "Model selector wording",
+        "model selector" in text.lower()
+    ),
+    (
+        "Nemotron 3 Super",
+        "nvidia/nemotron-3-super-120b-a12b:free" in text
+    ),
+    (
+        "No emoji characters",
+        not emoji_pattern.search(text)
+    ),
+]
+
+for name, ok in checks:
+    print(
+        f"  [{'OK' if ok else 'FAIL'}] {name}"
+    )
 
 print()
 print("Backup:")
-print("  index.html.before-qntaai-upgrade")
+print(" ", BACKUP.name)
 print()
